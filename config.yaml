@@ -1,0 +1,10 @@
+codeargs:
+  codepath: go/test
+  outputpath: /Users/haibei/study/gouml/test
+goenv:
+  gopath: /Users/haibei/go
+runtime:
+  log:
+    fileext: log
+    savename: test
+    savepath: applogs/

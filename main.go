@@ -18,5 +18,5 @@ package main
 import "github.com/haibeihabo/auto-uml-for-golang/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }

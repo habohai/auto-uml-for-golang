@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // logCmd represents the log command
@@ -51,4 +52,7 @@ func init() {
 	logCmd.Flags().StringP("path", "p", "./runtime/log", "the dir for save log file")
 	logCmd.Flags().StringP("name", "n", "test", "the name for save log file")
 	logCmd.Flags().StringP("ext", "e", "log", "the file ext for save log file")
+	viper.BindPFlag("runtime.log.savepath", logCmd.Flags().Lookup("path"))
+	viper.BindPFlag("runtime.log.fileext", logCmd.Flags().Lookup("name"))
+	viper.BindPFlag("runtime.log.savename", logCmd.Flags().Lookup("ext"))
 }

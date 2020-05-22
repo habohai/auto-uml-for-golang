@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // codeargsCmd represents the codeargs command
@@ -43,7 +44,11 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// codeargsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
+	viper.BindPFlags(codeargsCmd.Flags())
 	codeargsCmd.Flags().StringP("code_path", "c", "", "the golang code path")
 	codeargsCmd.Flags().StringP("output_path", "o", "./runtime/uml", "the path to output")
+	fmt.Println(viper.Get("codeargs.codepath"))
+	fmt.Println(viper.Get("codeargs.outputpath"))
+	viper.BindPFlag("codeargs.codepath", codeargsCmd.Flags().Lookup("code_path"))
+	viper.BindPFlag("codeargs.outputpath", codeargsCmd.Flags().Lookup("output_path"))
 }

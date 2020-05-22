@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/haibeihabo/auto-uml-for-golang/config"
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
@@ -64,7 +63,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	viper.BindPFlags(rootCmd.PersistentFlags())
 }
 
@@ -86,7 +85,6 @@ func initConfig() {
 		viper.AddConfigPath(".")
 		viper.SetConfigName("config")
 		viper.SetConfigType("yaml")
-
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
@@ -96,15 +94,7 @@ func initConfig() {
 		panic(fmt.Errorf("Fatal error config file: %s", err))
 	}
 
-	cfg := &config.Config{}
-
 	fmt.Println("Using config file:", viper.ConfigFileUsed())
-	if err := viper.Unmarshal(cfg); err != nil {
-		panic(fmt.Errorf("Fatal error unmarshal config: %s", err))
-	}
-
-	fmt.Println(viper.AllKeys())
-
 	fmt.Println("-------------------")
 	fmt.Println(viper.Get("runtime.log.savepath"))
 	fmt.Println(viper.Get("runtime.log.fileext"))
@@ -114,7 +104,4 @@ func initConfig() {
 	fmt.Println(viper.Get("config"))
 	fmt.Println(viper.Get("goenv.gopath"))
 	fmt.Println("-------------------")
-
-	fmt.Println(cfg.CodeArgs.CodePath)
-	fmt.Println(cfg.GoEnv.GoPath)
 }

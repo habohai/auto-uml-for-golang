@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // goenvCmd represents the goenv command
@@ -49,4 +50,5 @@ func init() {
 	// is called directly, e.g.:
 	// goenvCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	goenvCmd.Flags().StringP("gopath", "p", "/Users/haibei/go", "go path")
+	viper.BindPFlag("goenv.gopath", goenvCmd.Flags().Lookup("gopath"))
 }

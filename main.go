@@ -15,7 +15,9 @@ limitations under the License.
 */
 package main
 
-import "github.com/haibeihabo/auto-uml-for-golang/cmd"
+import (
+	"github.com/haibeihabo/auto-uml-for-golang/cmd"
+)
 
 func main() {
 	cmd.Execute()

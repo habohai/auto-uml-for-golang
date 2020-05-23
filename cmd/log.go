@@ -18,6 +18,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/haibeihabo/auto-uml-for-golang/pkg/logging"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -34,6 +35,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("log called")
+		logging.SetUp()
 	},
 }
 
@@ -52,7 +54,7 @@ func init() {
 	logCmd.Flags().StringP("path", "p", "./runtime/log", "the dir for save log file")
 	logCmd.Flags().StringP("name", "n", "test", "the name for save log file")
 	logCmd.Flags().StringP("ext", "e", "log", "the file ext for save log file")
-	viper.BindPFlag("runtime.log.savepath", logCmd.Flags().Lookup("path"))
-	viper.BindPFlag("runtime.log.fileext", logCmd.Flags().Lookup("name"))
-	viper.BindPFlag("runtime.log.savename", logCmd.Flags().Lookup("ext"))
+	viper.BindPFlag("runtime.log.path", logCmd.Flags().Lookup("path"))
+	viper.BindPFlag("runtime.log.ext", logCmd.Flags().Lookup("name"))
+	viper.BindPFlag("runtime.log.name", logCmd.Flags().Lookup("ext"))
 }

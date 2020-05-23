@@ -16,8 +16,7 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/haibeihabo/auto-uml-for-golang/codeanalysis"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -27,9 +26,7 @@ var codeargsCmd = &cobra.Command{
 	Use:   "codeargs",
 	Short: "code agrs",
 	Long:  "code args like: code path, gopath, outputfile",
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("codeargs called")
-	},
+	Run:   codeanalysis.RunAnalysis(),
 }
 
 func init() {
@@ -47,8 +44,8 @@ func init() {
 	viper.BindPFlags(codeargsCmd.Flags())
 	codeargsCmd.Flags().StringP("code_path", "c", "", "the golang code path")
 	codeargsCmd.Flags().StringP("output_path", "o", "./runtime/uml", "the path to output")
-	fmt.Println(viper.Get("codeargs.codepath"))
-	fmt.Println(viper.Get("codeargs.outputpath"))
+	codeargsCmd.Flags().StringP("ignore_dirs", "i", "", "dirs wangt ignore")
 	viper.BindPFlag("codeargs.codepath", codeargsCmd.Flags().Lookup("code_path"))
 	viper.BindPFlag("codeargs.outputpath", codeargsCmd.Flags().Lookup("output_path"))
+	viper.BindPFlag("codeargs.ignoredirs", codeargsCmd.Flags().Lookup("ignore_dirs"))
 }

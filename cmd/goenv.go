@@ -51,4 +51,5 @@ func init() {
 	// goenvCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	goenvCmd.Flags().StringP("gopath", "p", "/Users/haibei/go", "go path")
 	viper.BindPFlag("goenv.gopath", goenvCmd.Flags().Lookup("gopath"))
+	viper.BindEnv("goenv.gopath", "GOPATH")
 }

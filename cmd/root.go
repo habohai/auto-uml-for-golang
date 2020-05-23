@@ -20,6 +20,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/haibeihabo/auto-uml-for-golang/pkg/logging"
+	"github.com/haibeihabo/auto-uml-for-golang/pkg/waitsig"
 	"github.com/spf13/cobra"
 
 	homedir "github.com/mitchellh/go-homedir"
@@ -40,7 +42,10 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		go watchSignal()
+
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -95,13 +100,12 @@ func initConfig() {
 	}
 
 	fmt.Println("Using config file:", viper.ConfigFileUsed())
-	fmt.Println("-------------------")
-	fmt.Println(viper.Get("runtime.log.savepath"))
-	fmt.Println(viper.Get("runtime.log.fileext"))
-	fmt.Println(viper.Get("runtime.log.savename"))
-	fmt.Println(viper.Get("codeargs.codepath"))
-	fmt.Println(viper.Get("codeargs.outputpath"))
-	fmt.Println(viper.Get("config"))
-	fmt.Println(viper.Get("goenv.gopath"))
-	fmt.Println("-------------------")
+}
+
+func watchSignal() {
+	stop := make(chan struct{})
+	waitsig.WaitSignal(stop)
+
+	<-stop
+	logging.Infof("Signal caught; shutting down server")
 }

@@ -28,15 +28,17 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version number of auto-uml-for-golang",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("-------------------")
-		fmt.Println(viper.Get("runtime.log.savepath"))
-		fmt.Println(viper.Get("runtime.log.fileext"))
-		fmt.Println(viper.Get("runtime.log.savename"))
+		fmt.Println(viper.AllKeys())
+		fmt.Println(viper.Get("runtime.path"))
+		fmt.Println(viper.Get("runtime.log.path"))
+		fmt.Println(viper.Get("runtime.log.ext"))
+		fmt.Println(viper.Get("runtime.log.name"))
 		fmt.Println(viper.Get("codeargs.codepath"))
 		fmt.Println(viper.Get("codeargs.outputpath"))
-		fmt.Println(viper.Get("config"))
+		fmt.Println(viper.Get("codeargs.ignoredirs"))
 		fmt.Println(viper.Get("goenv.gopath"))
+		fmt.Println(viper.GetStringSlice("codeargs.ignoredirs"))
 		fmt.Println("-------------------")
-
 		fmt.Println("cobratest version is v0.0.1")
 	},
 }

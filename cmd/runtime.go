@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // runtimeCmd represents the runtime command
@@ -43,4 +44,6 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// runtimeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	runtimeCmd.Flags().StringP("path", "p", "./runtime", "the dir for save runtime file")
+	viper.BindPFlag("runtime.path", runtimeCmd.Flags().Lookup("path"))
 }

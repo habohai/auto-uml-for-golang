@@ -1,10 +1,13 @@
 codeargs:
-  codepath: go/test
+  codepath: ./go/test
+  ignoredirs:
+    - ./go/test/ignore
   outputpath: /Users/haibei/study/gouml/test
 goenv:
   gopath: /Users/haibei/go
 runtime:
+  path: ./runtime
   log:
-    fileext: log
-    savename: test
-    savepath: applogs/
+    ext: log
+    name: test
+    path: /applogs
